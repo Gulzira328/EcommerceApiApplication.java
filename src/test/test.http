@@ -1,0 +1,42 @@
+### 1. Public endpoint - 200
+GET http://localhost:8080/products
+
+###
+### 2. Register - 200  + "User registered"
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "prof",
+  "password": "1234"
+}
+
+###
+### 3.Login -200
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "prof",
+  "password": "1234"
+}
+
+###
+### 4.WITHOUT token -403
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "productName": "RTX 5090",
+  "quantity": 1
+}
+###
+### 5.WITH token - 200
+POST http://localhost:8080/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcm9mIiwiaWF0IjoxNzc4MzQ4MTQwLCJleHAiOjE3Nzg0MzQ1NDB9.qkUu25sZlY7ixKkbptGGpvIuZltm3RkiuEOrxyjOApU
+
+{
+  "productName": "RTX 5090",
+  "quantity": 1
+}

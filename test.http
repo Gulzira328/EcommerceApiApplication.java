@@ -1,0 +1,51 @@
+###
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "productName": "RTX 5090 GPU",
+  "quantity": 2
+}
+### 1. GET products - Should work without login = Status 200
+GET http://localhost:8080/products
+
+###
+### 2. Register a user - Should return "User registered" = Status 200
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+###
+### 3. Login - Should return a long token = Status 200
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "1234"
+}
+
+###
+### 4. Try to create order WITHOUT token - Should fail = Status 403 Forbidden
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "productName": "RTX 5090 GPU",
+  "quantity": 1
+}
+
+###
+### 5. Create order WITH token - Should work = Status 200
+POST http://localhost:8080/orders
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3ODM1MDIzMiwiZXhwIjoxNzc4NDM2NjMyfQ.5TO1Li-axpFgYEvN7SEZSLtkFS69j1jRcVnDsq5QbgI
+
+{
+  "productName": "RTX 5090 GPU",
+  "quantity": 1
+}
